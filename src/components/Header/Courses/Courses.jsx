@@ -2,20 +2,38 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Course from "../../Course/Course";
 import Registrations from "../../Registrations/Registrations";
+import TotalCredit from "../../TotalCredit/TotalCredit";
+import CreditHourRemaining from "../../CreditHourRemaining/CreditHourRemaining";
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
 
     const [registrations, setRegistrations] = useState([]);
 
+    const [totalCredit, setTotalCredit ] = useState(0);
+
+    const [remainingHour, setRemainingHour] = useState(20)
+
     const handleSubmit = (course) => {
         const showOnce = registrations.find(registration => registration.id === course.id);
+        let creditHours = course.credit_hours;
         if (showOnce) {
             alert('added once')
         }
         else {
-            const newRegistrations = [...registrations, course];
-            setRegistrations(newRegistrations);
+            registrations.forEach(registration => {
+                creditHours += registration.credit_hours;
+            })
+            if (creditHours > 20) {
+                alert('insufficient credit hours');
+            }
+            else {
+                const remaining = 20 - creditHours;
+                setRemainingHour(remaining)
+                const newRegistrations = [...registrations, course];
+                setRegistrations(newRegistrations);
+                setTotalCredit(creditHours)
+            }
         }
     }
 
@@ -36,7 +54,10 @@ const Courses = () => {
                 }
             </div>
             <div className="w-1/5">
+                <CreditHourRemaining remainingHour={remainingHour}></CreditHourRemaining>
                 <Registrations registrations={registrations}></Registrations>
+                <TotalCredit totalCredit={totalCredit}></TotalCredit>
+
             </div>
         </div>
     );

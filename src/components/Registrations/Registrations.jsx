@@ -2,7 +2,7 @@ import Registration from "../Registration/Registration";
 
 const Registrations = ({registrations}) => {
     return (
-        <div className="card bg-base-100 shadow-xl">
+        <div>
             <div className="px-6">
             <div className="w-full h-0.5 bg-[#1C1B1B33]"></div>
             </div>
