@@ -1,4 +1,4 @@
-const Course = ({ course }) => {
+const Course = ({ course, handleSubmit }) => {
 
     const { image, cource_name, details, price, credit_hours } = course;
 
@@ -16,7 +16,7 @@ const Course = ({ course }) => {
                 <p>Credit : {credit_hours}hr</p>
             </div>
             <div>
-                <button className="my-1 text-lg font-semibold text-center py-3 rounded-xl bg-[#2F80ED] text-white w-full">Submit</button>
+                <button onClick={()=>handleSubmit(course)} className="my-1 text-lg font-semibold text-center py-3 rounded-xl bg-[#2F80ED] text-white w-full">Submit</button>
             </div>
         </div>
     );
